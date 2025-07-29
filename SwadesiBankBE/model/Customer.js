@@ -1,13 +1,38 @@
 var mongoose = require('mongoose');
 var CustomerSchema = mongoose.Schema({
-    name:String,
-    email:String,
-    password:String,
-    mobile:String,
-    AccountType:String,
-    Gender:String,
-    Branch:String,
-    Balance:String
+    name:{
+        type:String,
+        required:[true,"Name is Mandatory"]
+    },
+    email:{
+        type:String,
+        required:[true,"Email is  Mandatory"],
+        unique:true,
+    },
+    password:{
+        type:String,
+        required:[true,"Password is Mandatory"],
+        minlength:8,
+        maxlength:16
+    },
+    mobile:{
+        type:String,
+        required:[true,"Mobile Number is Mandatory"],
+        minlength:10,
+        min:1000000000,
+        max:9999999999,
+        unique:true
+    },
+    Gender:{
+        type:String,
+        required:[true,"Gender is Mandotory"]
+    },
+    Balance:{
+        type:Number,
+        required:[true,"Balance is Mandotory"]
+    }
+},{
+    timeStamps:true
 })
-var Customer =  mongoose.model('customerdata',CustomerSchema);
-module.exports = Customer;
+var CustomerModel =  mongoose.model('customerdata',CustomerSchema);
+module.exports = CustomerModel;
